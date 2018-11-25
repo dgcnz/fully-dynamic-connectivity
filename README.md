@@ -18,7 +18,9 @@ git submodule init
 git submodule update
 ```
 
+## Screenshot
 
+![alt text](screenshots/sample.png "QtDictionary")
 
 
 ### More
