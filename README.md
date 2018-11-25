@@ -19,6 +19,10 @@ git submodule init
 git submodule update
 ```
 
+## Create Project
+
+To create your Qt Project in QtCreator simply double click in the .pro file (Qt & QtCreator should be installed in your system). After this it will prompt you a screen to create a native project based on your operating system just choose a location and select a Desktop target.
+
 ## Screenshot
 
 ![alt text](screenshots/sample.png "QtDictionary")
