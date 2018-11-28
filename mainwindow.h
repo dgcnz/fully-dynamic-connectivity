@@ -18,6 +18,8 @@
 #include <map>
 #include <random>
 
+#include <redblack/Tree.h>
+
 namespace Ui {
 class MainWindow;
 }
@@ -36,7 +38,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QLineEdit * search_textfield;
-
+     Tree<DictionaryTrait> rb_tree;
     std::map<std::string, std::string> complete_dictionary;
 
     void build_toolbar_programatically();

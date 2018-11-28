@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <redblack/Tree.h>
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -60,13 +58,7 @@ void MainWindow::load_dictionary_from_internal_resources() {
             this->complete_dictionary[word] = meaning;
 
             Tree<std::pair<std::string, std::string>> br_tree;
-
-            /*
-             *
-             * HERE you can use word and meaning to create your own structure and add it
-             * to your data structure. Both are of type std::string
-             *
-             * */
+            br_tree.insert_node(DictionaryTrait{word, meaning});
         }
         resource_file.close();
     } else {
@@ -141,21 +133,11 @@ void MainWindow::display_all_words() {
  *
  * */
 void MainWindow::on_autocompletion_list_itemClicked(QListWidgetItem *item) {
+    std::string word = item->text().toStdString();
+    std::string meaning = br_tree.find_recursive(); //TODO implementar br_tree como variable general
 
-    auto qword       = item->text();
-    auto qmeaning    = QString::fromStdString(this->complete_dictionary[item->text().toStdString()]);
-
-    /*
-     *  REPLACE the above lines with your search algorithm, something like the following:
-     *
-
-        std::string word = item->text().toStdString();
-        std::string meaning = <your_data_structure>.search(word).meaning;
-
-        auto qword      = QString::fromStdString(word);
-        auto qmeaning   = QString::fromStdString(meaning);
-    */
-
+    auto qword = QString::fromStdString(word);
+    auto qmeaning = QString::fromStdString(meaning);
 
     QString content =   "<b><font size=7 color=black>" + qword + "</font></b>";
     content         +=  "<br><br>";
