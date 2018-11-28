@@ -58,7 +58,7 @@ void MainWindow::load_dictionary_from_internal_resources() {
             this->complete_dictionary[word] = meaning;
 
             Tree<std::pair<std::string, std::string>> br_tree;
-            br_tree.insert_node(DictionaryTrait{word, meaning});
+            br_tree.insert_node(word, meaning);
         }
         resource_file.close();
     } else {
@@ -134,10 +134,10 @@ void MainWindow::display_all_words() {
  * */
 void MainWindow::on_autocompletion_list_itemClicked(QListWidgetItem *item) {
     std::string word = item->text().toStdString();
-    std::string meaning = br_tree.find_recursive(); //TODO implementar br_tree como variable general
+    auto node = rb_tree.find_recursive(word); //TODO implementar br_tree como variable general
 
-    auto qword = QString::fromStdString(word);
-    auto qmeaning = QString::fromStdString(meaning);
+    auto qword = QString::fromStdString(node->content);
+    auto qmeaning = QString::fromStdString(node->value);
 
     QString content =   "<b><font size=7 color=black>" + qword + "</font></b>";
     content         +=  "<br><br>";
