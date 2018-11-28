@@ -28,10 +28,12 @@ CONFIG += sdk_no_version_check
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    redblack/Tree.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    redblack/Tree.h
 
 FORMS += \
         mainwindow.ui
