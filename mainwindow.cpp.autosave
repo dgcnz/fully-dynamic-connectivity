@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->display_all_words();
 
     connect(search_textfield, &QLineEdit::textChanged, this, &MainWindow::search_textfield_text_has_changed);
+    Tree<std::pair<std::string, std::string>, CustomCompare()>
 }
 
 /*
