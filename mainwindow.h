@@ -18,7 +18,7 @@
 #include <map>
 #include <random>
 
-#include <redblack/Tree.h>
+#include <redblack/Tree.cpp>
 
 namespace Ui {
 class MainWindow;

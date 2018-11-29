@@ -32,8 +32,7 @@ SOURCES += \
     redblack/Tree.cpp
 
 HEADERS += \
-        mainwindow.h \
-    redblack/Tree.h
+        mainwindow.h
 
 FORMS += \
         mainwindow.ui
