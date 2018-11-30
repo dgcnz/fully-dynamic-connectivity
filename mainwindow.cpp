@@ -1,5 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "QtDebug"
+
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -50,6 +53,8 @@ void MainWindow::load_dictionary_from_internal_resources() {
 
     if (resource_file.open(QIODevice::ReadOnly)) {
         QTextStream in(&resource_file);
+        QTime my_timer;
+        my_timer.start();
         while (!in.atEnd()) {
             auto line       = in.readLine().toStdString();
             auto word       = line.substr(0, line.find(" "));
@@ -58,6 +63,7 @@ void MainWindow::load_dictionary_from_internal_resources() {
             this->complete_dictionary[word] = meaning;
             rb_tree.insert_node(word, meaning);
         }
+        qDebug() << "Time: " << my_timer.elapsed();
         resource_file.close();
     } else {
         qFatal("File doesn't exists");
@@ -132,7 +138,10 @@ void MainWindow::display_all_words() {
  * */
 void MainWindow::on_autocompletion_list_itemClicked(QListWidgetItem *item) {
     std::string word = item->text().toStdString();
+    QTime my_time;
+    my_time.start();
     auto node = rb_tree.find(word);
+    qDebug() << "Time Find: " << my_time.elapsed();
 
     auto qword = QString::fromStdString(node->content);
     auto qmeaning = QString::fromStdString(node->value);

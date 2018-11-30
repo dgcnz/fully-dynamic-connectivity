@@ -29,7 +29,8 @@ CONFIG += sdk_no_version_check
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    redblack/Tree.cpp
+    redblack/Tree.cpp \
+    redblack/benchtesttree.cpp
 
 HEADERS += \
         mainwindow.h
