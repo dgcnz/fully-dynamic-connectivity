@@ -1,4 +1,3 @@
-#include "../lib/edge.h"
 #include "../lib/node.h"
 
 Node::Node(int key, map<string, any> attr)

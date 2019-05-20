@@ -10,16 +10,17 @@
 
 using namespace std;
 
-enum RBNodeColor
+enum RBColor
 {
     BLACK = 0,
-    RED = 1
+    RED = 1,
+    DOUBLE_BLACK = 2
 };
 
 struct RBNode
 {
     int key;
-    RBNodeColor color;
+    RBColor color;
     map<string, any> attr;
     RBNode *left;
     RBNode *right;

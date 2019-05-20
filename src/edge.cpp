@@ -8,33 +8,38 @@ using namespace std;
 
 Edge::Edge(Node *v1, Node *v2)
 {
-    this->nodes[0] = v1;
-    this->nodes[1] = v2;
+    this->first = v1;
+    this->second = v2;
 }
 
-inline bool Edge::operator==(const Edge &e)
+template <typename T> inline bool Edge::operator==(const T &e)
 {
-    return this->nodes[0]->key == e.nodes[0]->key
-        && this->nodes[1]->key == e.nodes[1]->key;
+    return this->first->key == e.first->key
+        && this->second->key == e.second->key;
 }
-bool Edge::is(int vFrom, int vTo) const
-{
-    return (this->nodes[0]->key == vFrom && this->nodes[1]->key == vTo);
-}
+
 Node *Edge::operator[](int index)
 {
     assert(index >= 0 && index <= 1);
-    return this->nodes[index];
+    if (index == 0)
+        return this->first;
+    else
+        return this->second;
 }
 
 std::ostream &operator<<(std::ostream &os, const Edge &e)
 {
-    os << "edge: (" << e.nodes[0]->key << ", " << e.nodes[1]->key << ")\n";
+    os << "edge: (" << e.first->key << ", " << e.second->key << ")\n";
     return os;
 }
 Edge::~Edge()
 {
     std::cout << "deleting " << *(this);
-    this->nodes[0] = this->nodes[1] = nullptr;
+    this->first = this->second = nullptr;
     std::cout << "...    done.\n";
 }
+
+/************* EXPLICIT INSTATIATIONS *******************/
+
+template bool Edge::operator==(const Edge &e);
+template bool Edge::operator==(const pair<Node *, Node *> &e);
