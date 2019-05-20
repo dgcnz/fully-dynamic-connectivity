@@ -20,6 +20,8 @@ $(BIN)/%: $(SRC)/%.cpp $(OBJFILES)
 $(OBJ)/%.o: $(LIB)/%.cpp $(INC)/%.h
 	$(CXX) $(CXXFLAGS) $< -c
 
+re: clean all
+
 clean:
 	rm $(BIN)/*
 	rm $(OBJ)/*

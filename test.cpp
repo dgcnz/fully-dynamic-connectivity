@@ -163,7 +163,7 @@ public:
         }
         delete node;
         if (original == BLACK)
-        {
+    {
             bool side;
             Node *sibling;
             while (old != root && old->colour == BLACK)
