@@ -1,4 +1,4 @@
-#include "../lib/gridnode.h"
+#include "gridnode.h"
 
 GNode::GNode(int key, map<string, any> attr)
 {

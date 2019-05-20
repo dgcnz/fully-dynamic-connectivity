@@ -1,4 +1,4 @@
-#include "../lib/rb_tree.h"
+#include "rb_tree.h"
 #include <algorithm>
 #include <cassert>
 #include <fstream>

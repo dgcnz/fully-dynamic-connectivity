@@ -1,5 +1,5 @@
-#include "../lib/edge.h"
-#include "../lib/node.h"
+#include "edge.h"
+#include "node.h"
 
 #include <iostream>
 #include <utility>

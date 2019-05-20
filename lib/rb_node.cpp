@@ -1,4 +1,4 @@
-#include "../lib/rb_node.h"
+#include "rb_node.h"
 #include <typeinfo>
 
 RBNode::RBNode(int key, map<string, any> attr)

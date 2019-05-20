@@ -1,4 +1,4 @@
-#include "../lib/forest.h"
+#include "forest.h"
 
 Forest::Forest(const GGraph *const G)
 {

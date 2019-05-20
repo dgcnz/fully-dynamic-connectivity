@@ -1,11 +1,11 @@
 #ifndef __FOREST_H__
 #define __FOREST_H__
 
-#include "../lib/disjoint_set.h"
-#include "../lib/edge.h"
-#include "../lib/gridgraph.h"
-#include "../lib/node.h"
-#include "../lib/rb_tree.h"
+#include "disjoint_set.h"
+#include "edge.h"
+#include "gridgraph.h"
+#include "node.h"
+#include "rb_tree.h"
 #include <array>
 #include <cstdlib>
 #include <exception>

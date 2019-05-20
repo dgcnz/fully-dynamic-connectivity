@@ -1,6 +1,6 @@
 #ifndef __UTILITIES_H__
 #define __UTILITIES_H__
-#include "../lib/gridgraph.h"
+#include "gridgraph.h"
 #include <functional>
 #include <iostream>
 #include <utility>
