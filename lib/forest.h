@@ -2,7 +2,8 @@
 #define __FOREST_H__
 
 #include "../lib/disjoint_set.h"
-#include "../lib/graph.h"
+#include "../lib/edge.h"
+#include "../lib/gridgraph.h"
 #include "../lib/node.h"
 #include "../lib/rb_tree.h"
 #include <array>
@@ -20,17 +21,15 @@ using namespace std;
 class Forest
 {
     int size;
-    int av_nodes;
-    Node **nodes;
+    map<int, Node *> nodes;
     set<int> roots;
-    vector<RBTree *> ETTrees;
 
 public:
-    Forest(const Graph *const G);
-    void inheritVertices(const Graph *const G);
+    Forest(const GGraph *const G);
+    void inheritVertices(const GGraph *const G);
     void addNode(int v_key, map<string, any> attr);
     void addEdge(int v_key_from, int v_key_to);
-    void getSpanningForest(const Graph *const G);
+    void getSpanningForest(const GGraph *const G);
     int getSize() const;
     Node *&operator[](int index);
 };

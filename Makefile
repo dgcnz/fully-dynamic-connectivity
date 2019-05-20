@@ -18,5 +18,6 @@ clean:
 
 fclean: clean
 	rm -f $(TARGET)
+	rm -rf $(TARGET).dSYM/
 
 re: fclean all

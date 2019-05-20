@@ -1,23 +1,18 @@
 #include "../lib/forest.h"
 
-Forest::Forest(const Graph *const G)
+Forest::Forest(const GGraph *const G)
 {
-    this->size = G->size;
-    this->av_nodes = 0;
-
-    this->nodes = (Node **)malloc(sizeof(Node *) * size);
     this->inheritVertices(G);
     this->getSpanningForest(G);
 }
 
 void Forest::addNode(int v_key, map<string, any> attr)
 {
-
-    ++this->av_nodes;
+    ++this->size;
     (this->nodes)[v_key] = new Node(v_key, attr);
 }
 
-void Forest::inheritVertices(const Graph *const G)
+void Forest::inheritVertices(const GGraph *const G)
 {
     for (int i = 0; i < G->av_nodes; ++i)
         this->addNode(i, G->nodes[i]->attr);
@@ -34,15 +29,15 @@ void Forest::addEdge(int v_key_from, int v_key_to)
     this->nodes[v_key_to]->addEdge(this->nodes[v_key_from]);
 }
 
-void Forest::getSpanningForest(const Graph *const G)
+void Forest::getSpanningForest(const GGraph *const G)
 {
     DisjointSet DS(this->size);
     vector<pair<int, int>> GE;
 
-    for (int i = 0; i < this->av_nodes; ++i)
+    for (auto const &[key, v] : nodes)
     {
-        for (auto const &v2 : this->nodes[i]->edges)
-            GE.push_back(make_pair(i, v2->key));
+        for (auto const &e : v->edges)
+            GE.push_back(make_pair((*e)[0]->key, (*e)[1]->key));
     }
 
     for (auto const &[u, v] : GE)
@@ -54,13 +49,8 @@ void Forest::getSpanningForest(const Graph *const G)
         }
     }
 
-    for (int i = 0; i < this->av_nodes; ++i)
+    for (int i = 0; i < this->size; ++i)
         this->roots.insert(DS.findSet(i));
-}
-
-void Forest::buildETTrees()
-{
-
 }
 
 Node *&Forest::operator[](int index)

@@ -1,6 +1,6 @@
 #ifndef __UTILITIES_H__
 #define __UTILITIES_H__
-#include "../lib/graph.h"
+#include "../lib/gridgraph.h"
 #include <functional>
 #include <iostream>
 #include <utility>
@@ -39,7 +39,7 @@ Point deflatten(int z, int size)
     return make_pair(x, y);
 }
 
-void fill_board(Graph &G, int size)
+void fill_board(GGraph &G, int size)
 {
     using namespace std::placeholders;
 
@@ -47,13 +47,13 @@ void fill_board(Graph &G, int size)
     auto defflatten = std::bind(deflatten, _1, size);
 
     for (int i = 0, total = size * size; i < total; ++i)
-        G.addNode(i, { { "pos", defflatten(i) } });
+        G.addGNode(i, { { "pos", defflatten(i) } });
 
     for (int y = 0; y < size; ++y)
     {
         for (int x = 0; x < size; ++x)
         {
-            vector<Node *> edges;
+            vector<GNode *> edges;
             if (y > 0)
                 edges.push_back(G[fflatten(x, y - 1)]);
             if (y < size - 1)

@@ -1,59 +1,59 @@
-#include "../lib/graph.h"
+#include "../lib/gridgraph.h"
 
-Graph::Graph(const Graph *const G)
+GGraph::GGraph(const GGraph *const G)
 {
     this->size = G->size;
     this->av_nodes = 0;
 
-    this->nodes = (Node **)malloc(sizeof(Node *) * size);
+    this->nodes = (GNode **)malloc(sizeof(GNode *) * size);
     this->inheritVertices(G);
 }
-Graph::Graph(int size)
+GGraph::GGraph(int size)
     : size(size)
 {
-    this->nodes = (Node **)malloc(sizeof(Node *) * size);
+    this->nodes = (GNode **)malloc(sizeof(GNode *) * size);
     this->av_nodes = 0;
 }
 
-void Graph::addNode(int v_key, map<string, any> attr)
+void GGraph::addGNode(int v_key, map<string, any> attr)
 {
 
     ++this->av_nodes;
-    (this->nodes)[v_key] = new Node(v_key, attr);
+    (this->nodes)[v_key] = new GNode(v_key, attr);
 }
 
-void Graph::addEdge(int v_key_from, int v_key_to)
+void GGraph::addEdge(int v_key_from, int v_key_to)
 {
     this->nodes[v_key_from]->addEdge(this->nodes[v_key_to]);
     this->nodes[v_key_to]->addEdge(this->nodes[v_key_from]);
 }
 
-void Graph::removeEdge(int v_key_from, int v_key_to)
+void GGraph::removeEdge(int v_key_from, int v_key_to)
 {
     this->nodes[v_key_from]->removeEdge(this->nodes[v_key_to]);
     this->nodes[v_key_to]->removeEdge(this->nodes[v_key_from]);
 }
 
-void Graph::inheritVertices(const Graph *const G)
+void GGraph::inheritVertices(const GGraph *const G)
 {
     for (int i = 0; i < G->av_nodes; ++i)
-        this->addNode(i, G->nodes[i]->attr);
+        this->addGNode(i, G->nodes[i]->attr);
 }
 
-int Graph::getSize() const
+int GGraph::getSize() const
 {
     return this->size;
 }
 
-Node *&Graph::operator[](int index)
+GNode *&GGraph::operator[](int index)
 {
     assert(index >= 0 && index < size);
     return this->nodes[index];
 }
 
-Graph *Graph::getSpanningForest()
+GGraph *GGraph::getSpanningForest()
 {
-    Graph *SF = new Graph(this);
+    GGraph *SF = new GGraph(this);
     DisjointSet DS(this->size);
     vector<pair<int, int>> GE;
 
@@ -74,14 +74,14 @@ Graph *Graph::getSpanningForest()
     return SF;
 }
 
-string Graph::dumpDot(string filename) const
+string GGraph::dumpDot(string filename) const
 {
     // COMPILE: dot -Kfdp -n -Gsplines=True -Tpng filename > output.png
 
     string out = "";
 
     for (int i = 0; i < this->av_nodes; ++i)
-        out += nodes[i]->dumpNode();
+        out += nodes[i]->dumpGNode();
 
     out += "\n";
 

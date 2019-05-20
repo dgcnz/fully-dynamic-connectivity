@@ -1,4 +1,4 @@
-#include "lib/graph.h"
+#include "lib/gridgraph.h"
 #include "lib/rb_tree.h"
 #include "lib/utilities.h"
 #include <cmath>
@@ -15,7 +15,7 @@ int main(int argc, const char *argv[])
     using namespace std::placeholders; // for _1, _2, _3...
 
     int size = 9;
-    Graph G(size * size);
+    GGraph G(size * size);
     fill_board(G, size);
     // Forest *SF = G.getSpanningForest();
 

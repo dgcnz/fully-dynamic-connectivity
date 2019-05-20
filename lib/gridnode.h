@@ -1,11 +1,11 @@
-#ifndef __NODE_H__
-#define __NODE_H__
-
+#ifndef __GRIDNODE_H__
+#define __GRIDNODE_H__
 #include <algorithm>
 #include <any>
 #include <experimental/optional>
 #include <iostream>
 #include <map>
+#include <memory>
 #include <ostream>
 #include <sstream>
 #include <string>
@@ -16,28 +16,26 @@ using std::experimental::nullopt;
 using std::experimental::optional;
 using Coordinates = pair<int, int>;
 
-class Edge;
-
-class Node
+class GNode
 {
 public:
     int key;
-    vector<Edge *> edges;
+    vector<GNode *> edges;
     map<string, any> attr;
 
     /*****************************************************/
 
-    Node(int key, map<string, any> attr);
+    GNode(int key, map<string, any> attr);
 
-    void addEdge(Node *v);
-    void removeEdge(Edge *e);
-    string dumpNode();
+    void addEdge(GNode *v);
+    void removeEdge(GNode *v);
+    string dumpGNode();
     string dumpEdges();
 
     /*****************************************************/
 
-    friend bool operator==(const Node &v1, const Node &v2);
-    friend std::ostream &operator<<(std::ostream &os, const Node &v);
+    friend bool operator==(const GNode &v1, const GNode &v2);
+    friend std::ostream &operator<<(std::ostream &os, const GNode &v);
 };
 
 #endif
