@@ -1,23 +1,25 @@
-INCLUDES=./lib
-CC = g++
-CFLAGS = -Wall -std=c++17 -g
-TARGET = dynamic
 SRC = src
+INC = include
 OBJ = build
-CSOURCES = $(wildcard $(SRC)/*.cpp)
-COBJECTS = $(patsubst $(SRC)/%.cpp, $(OBJ)/%.out, $(CSOURCES))
+LIB = lib
+BIN = bin
 
-all: $(COBJECTS)
-	$(CC) $(CFLAGS) -o $(TARGET) main.cpp $(COBJECTS) -I$(INCLUDES)
+CXX = g++
+CXXFLAGS = -std=c++17 -o $@ -I $(INC)
 
-$(OBJ)/%.out: $(SRC)/%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+.PRECIOUS: $(OBJ)/%.o
+
+BINFILES = $(addprefix $(BIN)/, $(basename $(notdir $(wildcard $(SRC)/*.cpp))))
+OBJFILES = $(patsubst $(LIB)/%.cpp, $(OBJ)/%.o, $(wildcard $(LIB)/*))
+
+all: $(BINFILES)
+
+$(BIN)/%: $(SRC)/%.cpp $(OBJFILES)
+	$(CXX) $(CXXFLAGS) $^
+
+$(OBJ)/%.o: $(LIB)/%.cpp $(INC)/%.h
+	$(CXX) $(CXXFLAGS) $< -c
 
 clean:
-	rm -f $(COBJECTS) $(TARGET) *~
-
-fclean: clean
-	rm -f $(TARGET)
-	rm -rf $(TARGET).dSYM/
-
-re: fclean all
+	rm $(BIN)/*
+	rm $(OBJ)/*

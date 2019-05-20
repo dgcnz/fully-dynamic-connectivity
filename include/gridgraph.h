@@ -1,8 +1,8 @@
 #ifndef __GRIDGRAPH_H__
 #define __GRIDGRAPH_H__
 
-#include "../lib/disjoint_set.h"
-#include "../lib/gridnode.h"
+#include "disjoint_set.h"
+#include "gridnode.h"
 #include <array>
 #include <exception>
 #include <fstream>

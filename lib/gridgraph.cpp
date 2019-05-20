@@ -1,4 +1,4 @@
-#include "../lib/gridgraph.h"
+#include "gridgraph.h"
 
 GGraph::GGraph(const GGraph *const G)
 {

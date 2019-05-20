@@ -1,6 +1,6 @@
-#include "lib/gridgraph.h"
-#include "lib/rb_tree.h"
-#include "lib/utilities.h"
+#include "gridgraph.h"
+#include "rb_tree.h"
+#include "utilities.h"
 #include <cmath>
 #include <cstdarg>
 #include <functional>

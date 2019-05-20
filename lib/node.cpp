@@ -1,23 +1,24 @@
-#include "../lib/gridnode.h"
+#include "edge.h"
+#include "node.h"
 
-GNode::GNode(int key, map<string, any> attr)
+Node::Node(int key, map<string, any> attr)
 {
     this->key = key;
     this->attr = attr;
 }
 
-void GNode::addEdge(GNode *v)
+void Node::addEdge(Node *v)
 {
-    this->edges.push_back(v);
+    this->edges.push_back(new Edge(this, v));
 }
-void GNode::removeEdge(GNode *v)
+void Node::removeEdge(Edge *e)
 {
-    auto position = std::find_if(edges.begin(), edges.end(),
-        [&v](GNode *v2) { return v2->key == v->key; });
+    auto position = std::find_if(
+        edges.begin(), edges.end(), [&e](Edge *ep) { return e == ep; });
     if (position != edges.end())
         edges.erase(position);
 }
-string GNode::dumpGNode()
+string Node::dumpNode()
 {
     std::stringstream out;
 
@@ -43,15 +44,15 @@ string GNode::dumpGNode()
 
     return out.str();
 }
-string GNode::dumpEdges()
+string Node::dumpEdges()
 {
     string out = "";
 
-    for (auto const &v : edges)
+    for (auto const &e : this->edges)
     {
-        out += std::to_string(this->key);
+        out += std::to_string((*e)[0]->key);
         out += " -- ";
-        out += std::to_string(v->key);
+        out += std::to_string((*e)[1]->key);
         out += "\n";
     }
     return out;
@@ -59,13 +60,13 @@ string GNode::dumpEdges()
 
 /*****************************************************/
 
-std::ostream &operator<<(std::ostream &os, const GNode &v)
+std::ostream &operator<<(std::ostream &os, const Node &v)
 {
     os << "{NODE: " << v.key << "}";
     return os;
 }
 
-bool operator==(const GNode &v1, const GNode &v2)
+bool operator==(const Node &v1, const Node &v2)
 {
     return v1.key == v2.key;
 }
