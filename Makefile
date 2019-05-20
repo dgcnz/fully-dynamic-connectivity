@@ -1,17 +1,17 @@
-INCLUDES=./include
+INCLUDES=./lib
 CC = g++
-CFLAGS = -Wall
-TARGET = euler
+CFLAGS = -Wall -std=c++17 -g
+TARGET = dynamic
 SRC = src
 OBJ = build
 CSOURCES = $(wildcard $(SRC)/*.cpp)
 COBJECTS = $(patsubst $(SRC)/%.cpp, $(OBJ)/%.out, $(CSOURCES))
 
 all: $(COBJECTS)
-	$(CC) $(CFLAGS) -o $(TARGET) main.c $(COBJECTS) -I$(INCLUDES)
+	$(CC) $(CFLAGS) -o $(TARGET) main.cpp $(COBJECTS) -I$(INCLUDES)
 
 $(OBJ)/%.out: $(SRC)/%.cpp
-	gcc  -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(COBJECTS) $(TARGET) *~

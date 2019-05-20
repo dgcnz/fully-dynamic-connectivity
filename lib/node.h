@@ -12,90 +12,30 @@
 #include <vector>
 
 using namespace std;
-using std::experimental::optional;
 using std::experimental::nullopt;
+using std::experimental::optional;
 using Coordinates = pair<int, int>;
 
 class Node
 {
 public:
-    vector<Node *> edges;
     int key;
+    vector<Node *> edges;
     map<string, any> attr;
-    optional<Coordinates> xy;
 
     /*****************************************************/
 
-    Node(int key, map<string, any> attr)
-    {
-        this->key = key;
-        this->attr = attr;
-    }
+    Node(int key, map<string, any> attr);
 
-    void addEdge(Node *v)
-    {
-        this->edges.push_back(v);
-    }
-    void removeEdge(Node *v)
-    {
-        auto position = std::find_if(edges.begin(), edges.end(),
-            [&v](Node *v2) { return v2->key == v->key; });
-        if (position != edges.end())
-            edges.erase(position);
-    }
-    string dumpNode()
-    {
-        std::stringstream out;
-
-        out << to_string(this->key);
-
-        if (this->attr.size() > 0)
-        {
-            out << " [";
-            for (auto const &[key, val] : this->attr)
-            {
-                out << key << "=";
-                if (key.compare("pos") == 0)
-                    out << "\"" << any_cast<Coordinates>(val).first << ","
-                        << -1 * any_cast<Coordinates>(val).second << "!"
-                        << "\"";
-                else
-                    out << any_cast<string>(val);
-                out << " ";
-            }
-            out << "]";
-        }
-        out << "\n";
-
-        return out.str();
-    }
-    string dumpEdges()
-    {
-        string out = "";
-
-        for (auto const &v : edges)
-        {
-            out += std::to_string(this->key);
-            out += " -- ";
-            out += std::to_string(v->key);
-            out += "\n";
-        }
-        return out;
-    }
+    void addEdge(Node *v);
+    void removeEdge(Node *v);
+    string dumpNode();
+    string dumpEdges();
 
     /*****************************************************/
 
     friend bool operator==(const Node &v1, const Node &v2);
-    friend std::ostream &operator<<(std::ostream &os, const Node &v)
-    {
-        os << "{NODE: " << v.key << "}";
-        return os;
-    }
+    friend std::ostream &operator<<(std::ostream &os, const Node &v);
 };
-
-bool operator==(const Node &v1, const Node &v2)
-{
-    return v1.key == v2.key;
-}
 
 #endif

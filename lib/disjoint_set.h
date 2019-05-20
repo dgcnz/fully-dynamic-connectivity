@@ -1,3 +1,6 @@
+#ifndef __DISJOINT_SET_H__
+#define __DISJOINT_SET_H__
+
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
@@ -53,3 +56,4 @@ public:
         free(this->parent);
     };
 };
+#endif

@@ -2,9 +2,11 @@
 #define __RB_NODE_H__
 
 #include <any>
+#include <iostream>
 #include <map>
 #include <sstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -23,16 +25,15 @@ struct RBNode
     RBNode *right;
     RBNode *parent;
 
-    explicit RBNode(int key, map<string, any> attr, RBNode *parent);
-    explicit RBNode(RBNode *parent);
+    explicit RBNode(int key, map<string, any> attr);
     inline bool operator==(const RBNode &t) const;
     inline bool operator<(const RBNode &t) const;
-    void changeColor(RBNodeColor color);
 
     string dumpNode() const;
     string dumpEdges() const;
     string dumpAllChildren() const;
     string dumpAllChildrenEdges() const;
+    void store_rank(vector<vector<int>> &ranks, int level) const;
 
     friend std::ostream &operator<<(std::ostream &os, const RBNode &v);
 };

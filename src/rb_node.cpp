@@ -1,20 +1,15 @@
 #include "../lib/rb_node.h"
+#include <typeinfo>
 
-RBNode::RBNode(int key, map<string, any> attr, RBNode *parent)
+RBNode::RBNode(int key, map<string, any> attr)
     : key(key)
-    , color(BLACK)
+    , color(RED)
     , attr(attr)
     , left(nullptr)
     , right(nullptr)
-    , parent(parent)
+    , parent(nullptr)
 {
-}
-
-RBNode::RBNode(RBNode *parent)
-    : left(nullptr)
-    , right(nullptr)
-    , parent(parent)
-{
+    this->attr["color"] = string("red");
 }
 
 inline bool RBNode::operator==(const RBNode &t) const
@@ -27,15 +22,6 @@ inline bool RBNode::operator<(const RBNode &t) const
     return key < t.key;
 }
 
-void RBNode::changeColor(RBNodeColor color)
-{
-    this->color = color;
-    if (color == BLACK)
-        this->attr["color"] = "black";
-    else if (color == RED)
-        this->attr["color"] = "red";
-}
-
 string RBNode::dumpNode() const
 {
     std::stringstream out;
@@ -45,13 +31,12 @@ string RBNode::dumpNode() const
     if (this->attr.size() > 0)
     {
         out << " [";
-        for (auto &[key, val] : this->attr)
+        for (auto const &[key, val] : this->attr)
         {
             if (key.compare("pos") == 0)
                 continue;
             out << key << "=";
             out << any_cast<string>(val);
-
             out << " ";
         }
         out << "]";
@@ -64,15 +49,20 @@ string RBNode::dumpEdges() const
 {
     string out = "";
 
-    out += std::to_string(this->key);
-    out += " -- ";
-    out += std::to_string(this->left->key);
-    out += "\n";
-
-    out += std::to_string(this->key);
-    out += " -- ";
-    out += std::to_string(this->right->key);
-    out += "\n";
+    if (this->left)
+    {
+        out += std::to_string(this->key);
+        out += " -- ";
+        out += std::to_string(this->left->key);
+        out += "\n";
+    }
+    if (this->right)
+    {
+        out += std::to_string(this->key);
+        out += " -- ";
+        out += std::to_string(this->right->key);
+        out += "\n";
+    }
 
     return out;
 }
@@ -87,6 +77,19 @@ string RBNode::dumpAllChildrenEdges() const
 {
     return dumpEdges() + (this->left ? this->left->dumpAllChildrenEdges() : "")
         + (this->right ? this->right->dumpAllChildrenEdges() : "");
+}
+
+void RBNode::store_rank(vector<vector<int>> &ranks, int level) const
+{
+    if (level >= ranks.size())
+        ranks.push_back({ this->key });
+    else
+        ranks[level].push_back(this->key);
+
+    if (this->left)
+        this->left->store_rank(ranks, level + 1);
+    if (this->right)
+        this->right->store_rank(ranks, level + 1);
 }
 
 /*****************************************************/
