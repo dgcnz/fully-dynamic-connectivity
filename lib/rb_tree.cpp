@@ -1,5 +1,6 @@
 #include "rb_tree.h"
-#include <bits/stdc++.h>
+#include <fstream>
+
 using namespace std;
 
 RBTree::RBTree()
