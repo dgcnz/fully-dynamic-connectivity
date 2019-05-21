@@ -1,5 +1,9 @@
 #include "forest.h"
 
+Forest::Forest(void)
+{
+}
+
 void Forest::inheritVertices(const Graph *const G)
 {
     for (auto const &[k, v] : G->nodes)
@@ -13,7 +17,7 @@ void Forest::getSpanningForest(const Graph *const G)
     DisjointSet DS(this->size);
     vector<pair<int, int>> GE;
 
-    for (auto const &[k, v] : nodes)
+    for (auto const &[k, v] : G->nodes)
     {
         for (auto const &e : v->edges)
             GE.push_back(make_pair((*e)[0]->key, (*e)[1]->key));
@@ -38,6 +42,7 @@ void Forest::buildEulerian(void)
 {
     for (auto const &root : this->roots)
     {
+        cout << "BUILDING ET TREE WITH ROOT: " << root << endl;
         this->eulerian.push_back(new ET_Tree(this->nodes[root]));
     }
 }

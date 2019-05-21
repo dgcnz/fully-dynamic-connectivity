@@ -24,7 +24,7 @@ re: clean all
 
 run: all
 	./bin/main
-	dot -Tpng exports/dot/test.dot > exports/images/output.png
+	neato -Tpng exports/dot/test.dot > exports/images/output.png
 	open exports/images/output.png
 
 clean:

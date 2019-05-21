@@ -3,6 +3,7 @@
 
 #include "node.h"
 #include "rb_tree.h"
+#include <map>
 
 class ET_Tree
 {
@@ -13,7 +14,8 @@ public:
     ET_Tree(Node *tree_root);
 
     void ET(int &x, Node *root, Node *parent);
-    string dumpDot(string filename = "") const;
+    void visit(int &x, Node *node);
+    string dumpDot(string filename) const;
 };
 
 #endif
