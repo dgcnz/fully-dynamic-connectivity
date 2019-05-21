@@ -12,6 +12,22 @@ RBNode::RBNode(int key, map<string, any> attr)
     this->attr["color"] = string("red");
 }
 
+void RBNode::setColor(RBColor color)
+{
+    this->color = color;
+    if (color == BLACK)
+        this->attr["color"] = string("black");
+    else if (color == RED)
+        this->attr["color"] = string("red");
+    else if (color == DOUBLE_BLACK)
+        this->attr["color"] = string("blue");
+}
+
+RBColor RBNode::getColor()
+{
+    return this->color;
+}
+
 inline bool RBNode::operator==(const RBNode &t) const
 {
     return key == t.key;
@@ -36,7 +52,9 @@ string RBNode::dumpNode() const
             if (key.compare("pos") == 0)
                 continue;
             out << key << "=";
+            cout << this->key << key << endl;
             out << any_cast<string>(val);
+            cout << "casted to string \n";
             out << " ";
         }
         out << "]";

@@ -12,9 +12,9 @@ using namespace std;
 
 enum RBColor
 {
-    BLACK = 0,
-    RED = 1,
-    DOUBLE_BLACK = 2
+    RED,
+    BLACK,
+    DOUBLE_BLACK
 };
 
 struct RBNode
@@ -27,6 +27,10 @@ struct RBNode
     RBNode *parent;
 
     explicit RBNode(int key, map<string, any> attr);
+
+    void setColor(RBColor color);
+    RBColor getColor();
+
     inline bool operator==(const RBNode &t) const;
     inline bool operator<(const RBNode &t) const;
 

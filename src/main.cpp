@@ -22,19 +22,19 @@ int main(int argc, const char *argv[])
 
     RBTree RBT;
 
-    RBT.rbtInsert(0, {});
-    RBT.rbtInsert(1, {});
-    RBT.rbtInsert(2, {});
-    RBT.rbtInsert(3, {});
-    RBT.rbtInsert(4, {});
-    RBT.rbtInsert(5, {});
-    RBT.rbtInsert(6, {});
-    RBT.rbtInsert(7, {});
-    RBT.rbtInsert(8, {});
-    RBT.rbtInsert(9, {});
-    RBT.rbtInsert(10, {});
+    RBT.insertValue(0, {});
+    RBT.insertValue(1, {});
+    RBT.insertValue(2, {});
+    RBT.insertValue(3, {});
+    RBT.insertValue(4, {});
+    RBT.insertValue(5, {});
+    RBT.insertValue(6, {});
+    RBT.insertValue(7, {});
+    RBT.insertValue(8, {});
+    RBT.insertValue(9, {});
+    RBT.insertValue(10, {});
 
-    RBT.rbtDelete(0);
-    cout << RBT.dumpDot("exports/test.dot") << endl;
+    RBT.deleteValue(0);
+    cout << RBT.dumpDot("exports/dot/test.dot") << endl;
     return 0;
 }

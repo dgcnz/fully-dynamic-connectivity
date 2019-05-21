@@ -5,7 +5,7 @@ LIB = lib
 BIN = bin
 
 CXX = g++
-CXXFLAGS = -std=c++17 -o $@ -I $(INC)
+CXXFLAGS = -g -std=c++17 -o $@ -I $(INC)
 
 .PRECIOUS: $(OBJ)/%.o
 
@@ -22,6 +22,11 @@ $(OBJ)/%.o: $(LIB)/%.cpp $(INC)/%.h
 
 re: clean all
 
+run: all
+	./bin/main
+	dot -Tpng exports/dot/test.dot > exports/images/output.png
+	open exports/images/output.png
+
 clean:
-	rm $(BIN)/*
+	rm -rf $(BIN)/*
 	rm $(OBJ)/*

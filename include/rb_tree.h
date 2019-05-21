@@ -1,42 +1,40 @@
-#ifndef __RB_TREE_H
-#define __RB_TREE_H
-
+#ifndef __RB_TREE_H__
+#define __RB_TREE_H__
 #include "rb_node.h"
-#include <string>
-
-using namespace std;
+/*
+ * The base structure of this RED BLACK TREE was implemented by @anandarao
+ * SOURCE: https://github.com/anandarao/Red-Black-Tree
+ */
 
 class RBTree
 {
 private:
     RBNode *root;
 
+protected:
+    void rotateLeft(RBNode *&);
+    void rotateRight(RBNode *&);
+    void fixInsertRBTree(RBNode *&);
+    void fixDeleteRBTree(RBNode *&);
+    void inorderBST(RBNode *&);
+    void preorderBST(RBNode *&);
+    int getColor(RBNode *&);
+    void setColor(RBNode *&, RBColor);
+    RBNode *minValueRBNode(RBNode *&);
+    RBNode *maxValueRBNode(RBNode *&);
+    RBNode *insertBST(RBNode *&, RBNode *&);
+    RBNode *deleteBST(RBNode *&, int);
+    int getBlackHeight(RBNode *);
+
 public:
     RBTree();
-
-    void rbtInsert(int key, map<string, any> attr);
-    void rbtDelete(int key);
-
+    void insertValue(int, map<string, any>);
+    void deleteValue(int);
+    void merge(RBTree);
+    void inorder();
+    void preorder();
     string dumpDot(string filename = "") const;
     string dumpAllRanks() const;
-
-private:
-    void leftRotate(RBNode *&node);
-    void rightRotate(RBNode *&node);
-
-    void rbtInsertFixup(RBNode *&x);
-    void rbtDeleteFixup(RBNode *&x);
-
-    RBNode *bstInsert(RBNode *&root, RBNode *&z);
-    bool bstFind(int key, RBNode **&nodeptr);
-    void bstDelete(RBNode *&z);
-    void bstTransplant(RBNode *u, RBNode *v);
-
-    void setColor(RBNode *&node, RBColor color);
-    RBColor getColor(RBNode *&node);
-
-    RBNode *bstMinimum(RBNode *x);
-    RBNode *bstMaximum(RBNode *x);
 };
 
 #endif
