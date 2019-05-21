@@ -4,7 +4,7 @@ using namespace std;
 
 RBTree::RBTree()
 {
-    root = nullptr;
+    this->root = nullptr;
 }
 
 int RBTree::getColor(RBNode *&node)
@@ -45,7 +45,9 @@ RBNode *RBTree::insertBST(RBNode *&root, RBNode *&ptr)
 void RBTree::insertValue(int key, map<string, any> attr)
 {
     RBNode *node = new RBNode(key, attr);
+    cout << "Inserting " << key << " into rbtree\n";
     root = insertBST(root, node);
+    cout << "fixing up insertion\n";
     fixInsertRBTree(node);
 }
 

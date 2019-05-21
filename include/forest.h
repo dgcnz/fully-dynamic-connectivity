@@ -27,6 +27,16 @@ public:
     void inheritVertices(const Graph *const G);
     void getSpanningForest(const Graph *const G);
     void buildEulerian(void);
+    string dumpETDot(string filename = "")
+    {
+        string out = "";
+        for (int i = 0; i < eulerian.size(); ++i)
+        {
+            string temp = "";
+            temp += this->eulerian[i]->dumpDot(filename + to_string(i));
+        }
+        return out;
+    }
 };
 
 #endif

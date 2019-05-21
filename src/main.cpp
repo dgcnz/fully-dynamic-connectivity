@@ -1,4 +1,4 @@
-#include "gridgraph.h"
+#include "forest.h"
 #include "rb_tree.h"
 #include "utilities.h"
 #include <cmath>
@@ -13,10 +13,17 @@ using namespace std;
 int main(int argc, const char *argv[])
 {
     using namespace std::placeholders; // for _1, _2, _3...
-    int board_size = 9;
+    int board_size = 3;
     Graph G;
+    Forest SF;
+
     fill_board(G, board_size);
 
-    cout << G.dumpDot("exports/dot/test.dot") << endl;
+    SF.getSpanningForest(&G);
+    SF.buildEulerian();
+
+    cout << G.dumpDot("exports/dot/graph.dot") << endl;
+    cout << SF.dumpDot("exports/dot/spanning.dot") << endl;
+    cout << SF.dumpETDot("exports/dot/euler.dot") << endl;
     return 0;
 }

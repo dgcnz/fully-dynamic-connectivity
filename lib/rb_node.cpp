@@ -1,3 +1,4 @@
+#include "node.h"
 #include "rb_node.h"
 #include <typeinfo>
 
@@ -47,15 +48,26 @@ string RBNode::dumpNode() const
     if (this->attr.size() > 0)
     {
         out << " [";
-        for (auto const &[key, val] : this->attr)
+        for (auto const &[k, v] : this->attr)
         {
-            if (key.compare("pos") == 0)
+            if (k.compare("pos") == 0)
                 continue;
-            out << key << "=";
-            cout << this->key << key << endl;
-            out << any_cast<string>(val);
-            cout << "casted to string \n";
-            out << " ";
+            else if (k.compare("occurrence") == 0)
+            {
+                cout << "Occurrence of node\n";
+                Node *o = any_cast<Node *>(v);
+                out << "xlabel="
+                    << "\"{" << o->key << "}\""
+                    << " ";
+            }
+            else
+            {
+                out << k << "=";
+                cout << this->key << k << endl;
+                out << any_cast<string>(v);
+                cout << "casted to string \n";
+                out << " ";
+            }
         }
         out << "]";
     }
