@@ -3,12 +3,11 @@
 
 #include "disjoint_set.h"
 #include "edge.h"
+#include "et_trees.h"
+#include "graph.h"
 #include "gridgraph.h"
 #include "node.h"
 #include "rb_tree.h"
-#include <array>
-#include <cstdlib>
-#include <exception>
 #include <fstream>
 #include <iostream>
 #include <memory>
@@ -18,20 +17,16 @@
 
 using namespace std;
 
-class Forest
+class Forest : public Graph
 {
-    int size;
-    map<int, Node *> nodes;
     set<int> roots;
+    vector<ET_Tree *> eulerian;
 
 public:
-    Forest(const GGraph *const G);
-    void inheritVertices(const GGraph *const G);
-    void addNode(int v_key, map<string, any> attr);
-    void addEdge(int v_key_from, int v_key_to);
-    void getSpanningForest(const GGraph *const G);
-    int getSize() const;
-    Node *&operator[](int index);
+    Forest(void);
+    void inheritVertices(const Graph *const G);
+    void getSpanningForest(const Graph *const G);
+    void buildEulerian(void);
 };
 
 #endif

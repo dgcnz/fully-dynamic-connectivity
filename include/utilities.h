@@ -1,6 +1,6 @@
 #ifndef __UTILITIES_H__
 #define __UTILITIES_H__
-#include "gridgraph.h"
+#include "graph.h"
 #include <functional>
 #include <iostream>
 #include <utility>
@@ -39,7 +39,7 @@ Point deflatten(int z, int size)
     return make_pair(x, y);
 }
 
-void fill_board(GGraph &G, int size)
+void fill_board(Graph &G, int size)
 {
     using namespace std::placeholders;
 
@@ -47,22 +47,21 @@ void fill_board(GGraph &G, int size)
     auto defflatten = std::bind(deflatten, _1, size);
 
     for (int i = 0, total = size * size; i < total; ++i)
-        G.addGNode(i, { { "pos", defflatten(i) } });
+        G.addNode(i, { { "pos", defflatten(i) } });
 
     for (int y = 0; y < size; ++y)
     {
         for (int x = 0; x < size; ++x)
         {
-            vector<GNode *> edges;
+            Node *u = G[fflatten(x, y)];
             if (y > 0)
-                edges.push_back(G[fflatten(x, y - 1)]);
+                u->addEdge(G[fflatten(x, y - 1)]);
             if (y < size - 1)
-                edges.push_back(G[fflatten(x, y + 1)]);
+                u->addEdge(G[fflatten(x, y + 1)]);
             if (x > 0)
-                edges.push_back(G[fflatten(x - 1, y)]);
+                u->addEdge(G[fflatten(x - 1, y)]);
             if (x < size - 1)
-                edges.push_back(G[fflatten(x + 1, y)]);
-            G[fflatten(x, y)]->edges = edges;
+                u->addEdge(G[fflatten(x + 1, y)]);
         }
     }
 }

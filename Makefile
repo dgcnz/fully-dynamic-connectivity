@@ -29,4 +29,4 @@ run: all
 
 clean:
 	rm -rf $(BIN)/*
-	rm $(OBJ)/*
+	rm -f $(OBJ)/*

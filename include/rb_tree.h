@@ -1,6 +1,7 @@
 #ifndef __RB_TREE_H__
 #define __RB_TREE_H__
 #include "rb_node.h"
+
 /*
  * The base structure of this RED BLACK TREE was implemented by @anandarao
  * SOURCE: https://github.com/anandarao/Red-Black-Tree
