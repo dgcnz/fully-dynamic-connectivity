@@ -35,14 +35,18 @@ void Forest::getSpanningForest(const Graph *const G)
     for (int i = 0; i < this->size; ++i)
         this->roots.insert(DS.findSet(i));
 
-    this->buildEulerian();
+    for (auto const &i : this->roots)
+    {
+        cout << "\t\t>>ROOT: " << i << endl;
+    }
 }
 
 void Forest::buildEulerian(void)
 {
-    for (auto const &root : this->roots)
+    cout << "ROOT SIZE : " << this->roots.size() << endl;
+    for (auto const &r : this->roots)
     {
-        cout << "BUILDING ET TREE WITH ROOT: " << root << endl;
-        this->eulerian.push_back(new ET_Tree(this->nodes[root]));
+        cout << "BUILDING ET TREE WITH ROOT: " << r << endl;
+        this->eulerian.push_back(new ET_Tree(this->nodes[r]));
     }
 }
