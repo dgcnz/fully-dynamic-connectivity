@@ -2,6 +2,7 @@
 
 Graph::Graph()
 {
+    this->size = 0;
 }
 
 void Graph::addNode(int v_key, map<string, any> attr)

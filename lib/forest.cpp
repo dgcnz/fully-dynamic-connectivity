@@ -2,6 +2,7 @@
 
 Forest::Forest(void)
 {
+    this->size = 0;
 }
 
 void Forest::inheritVertices(const Graph *const G)
@@ -34,19 +35,12 @@ void Forest::getSpanningForest(const Graph *const G)
 
     for (int i = 0; i < this->size; ++i)
         this->roots.insert(DS.findSet(i));
-
-    for (auto const &i : this->roots)
-    {
-        cout << "\t\t>>ROOT: " << i << endl;
-    }
 }
 
 void Forest::buildEulerian(void)
 {
-    cout << "ROOT SIZE : " << this->roots.size() << endl;
     for (auto const &r : this->roots)
     {
-        cout << "BUILDING ET TREE WITH ROOT: " << r << endl;
         this->eulerian.push_back(new ET_Tree(this->nodes[r]));
     }
 }
