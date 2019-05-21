@@ -2,6 +2,7 @@
 #define __NODE_H__
 
 #include "edge.h"
+#include "rb_node.h"
 #include <algorithm>
 #include <any>
 #include <experimental/optional>
@@ -18,7 +19,6 @@ using std::experimental::optional;
 using Coordinates = pair<int, int>;
 
 class Edge;
-class DSNode;
 class SFNode;
 
 class Node
@@ -29,11 +29,11 @@ public:
     map<string, any> attr;
 
     /*****************************************************/
-
+    Node();
     Node(int key, map<string, any> attr);
 
-    void addEdge(Node *v);
-    void removeEdge(Edge *e);
+    virtual void addEdge(Node *v);
+    virtual void removeEdge(Node *v);
     string dumpNode();
     string dumpEdges();
 
@@ -42,18 +42,27 @@ public:
     friend bool operator==(const Node &v1, const Node &v2);
     friend std::ostream &operator<<(std::ostream &os, const Node &v);
 };
-/*
-class SFNode : public Node
+
+class SFNode
 {
-    DSNode *first_ccurrence;
-    DSNode *last_ccurrence;
+public:
+    int key;
+    map<string, any> attr;
+    vector<SFEdge *> edges;
+    RBNode *first_occurrence;
+    RBNode *last_occurrence;
 
 public:
+    SFNode(int key, map<string, any> attr)
+    {
+        this->key = key;
+        this->attr = attr;
+        this->first_occurrence = this->last_occurrence = nullptr;
+    }
+    void addEdge(SFNode *v);
+    void removeEdge(SFEdge *e);
+    string dumpNode();
+    string dumpEdges();
 };
 
-class DSNode : public Node
-{
-    SFNode *represented;
-};
-*/
 #endif

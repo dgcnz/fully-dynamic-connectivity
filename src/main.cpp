@@ -1,5 +1,4 @@
-#include "forest.h"
-#include "rb_tree.h"
+#include "dynamic_graph.h"
 #include "utilities.h"
 #include <cmath>
 #include <cstdarg>
@@ -18,12 +17,17 @@ int main(int argc, const char *argv[])
     Forest SF;
 
     fill_board(G, board_size);
+    G.removeEdge(0, 1);
+    G.removeEdge(1, 0);
 
-    SF.getSpanningForest(&G);
-    SF.buildEulerian();
+    G.removeEdge(0, 3);
+    G.removeEdge(3, 0);
+    DynamicGraph DF(&G);
+    if (DF.isConnected(0, 1))
+        cout << "CONECTADO\n";
+    else
+        cout << "NO CONECTADO\n";
+    DF.dumpDot();
 
-    cout << G.dumpDot("exports/dot/graph.dot") << endl;
-    cout << SF.dumpDot("exports/dot/spanning.dot") << endl;
-    cout << SF.dumpETDot("exports/dot/euler.dot") << endl;
     return 0;
 }

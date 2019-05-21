@@ -5,10 +5,27 @@ Forest::Forest(void)
     this->size = 0;
 }
 
+void Forest::addNode(int v_key, map<string, any> attr)
+{
+    ++this->size;
+    (this->nodes)[v_key] = new SFNode(v_key, attr);
+}
+
+void Forest::addEdge(int v_key_from, int v_key_to)
+{
+    this->nodes[v_key_from]->addEdge(this->nodes[v_key_to]);
+    this->nodes[v_key_to]->addEdge(this->nodes[v_key_from]);
+}
+
 void Forest::inheritVertices(const Graph *const G)
 {
     for (auto const &[k, v] : G->nodes)
         this->addNode(v->key, v->attr);
+}
+
+SFNode *&Forest::operator[](int index)
+{
+    return this->nodes[index];
 }
 
 void Forest::getSpanningForest(const Graph *const G)
@@ -43,4 +60,15 @@ void Forest::buildEulerian(void)
     {
         this->eulerian.push_back(new ET_Tree(this->nodes[r]));
     }
+}
+
+string Forest::dumpETDot(string filename)
+{
+    string out = "";
+    for (int i = 0; i < eulerian.size(); ++i)
+    {
+        string temp = "";
+        temp += this->eulerian[i]->dumpDot(filename + to_string(i));
+    }
+    return out;
 }

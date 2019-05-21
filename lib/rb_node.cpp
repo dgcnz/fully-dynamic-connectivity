@@ -54,8 +54,7 @@ string RBNode::dumpNode() const
                 continue;
             else if (k.compare("occurrence") == 0)
             {
-                cout << "Occurrence of node\n";
-                Node *o = any_cast<Node *>(v);
+                SFNode *o = any_cast<SFNode *>(v);
                 out << "xlabel="
                     << "\"{" << o->key << "}\""
                     << " ";
@@ -63,9 +62,7 @@ string RBNode::dumpNode() const
             else
             {
                 out << k << "=";
-                cout << this->key << k << endl;
                 out << any_cast<string>(v);
-                cout << "casted to string \n";
                 out << " ";
             }
         }

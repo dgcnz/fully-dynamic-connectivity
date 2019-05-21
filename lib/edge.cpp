@@ -12,6 +12,13 @@ Edge::Edge(Node *v1, Node *v2)
     this->second = v2;
 }
 
+SFEdge::SFEdge(SFNode *v1, SFNode *v2, int level)
+{
+    this->first = v1;
+    this->second = v2;
+    this->level = level;
+}
+
 template <typename T> inline bool Edge::operator==(const T &e)
 {
     return this->first->key == e.first->key
@@ -19,6 +26,15 @@ template <typename T> inline bool Edge::operator==(const T &e)
 }
 
 Node *Edge::operator[](int index)
+{
+    assert(index >= 0 && index <= 1);
+    if (index == 0)
+        return this->first;
+    else
+        return this->second;
+}
+
+SFNode *SFEdge::operator[](int index)
 {
     assert(index >= 0 && index <= 1);
     if (index == 0)

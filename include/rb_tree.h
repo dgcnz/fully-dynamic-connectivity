@@ -36,6 +36,24 @@ public:
     void preorder();
     string dumpDot(string filename = "") const;
     string dumpAllRanks() const;
+    bool find(int key, RBNode **&nodeptr)
+    {
+        nodeptr = &root;
+        if (!this->root)
+            return false;
+        else
+        {
+            while ((*nodeptr)->key != key)
+            {
+                nodeptr = key > (*nodeptr)->key ? &((*nodeptr)->right)
+                                                : &((*nodeptr)->left);
+                if (!(*nodeptr))
+                    return false;
+            }
+
+            return true;
+        }
+    }
 };
 
 #endif

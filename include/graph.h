@@ -24,7 +24,8 @@ public:
     Graph();
     void addNode(int v_key, map<string, any> attr);
     void addEdge(int v_key_from, int v_key_to);
-    Node *&operator[](int index);
+    void removeEdge(int v_key_from, int v_key_to);
+    virtual Node *&operator[](int index);
     virtual string dumpDot(string filename) const
     {
 

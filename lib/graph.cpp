@@ -21,3 +21,9 @@ Node *&Graph::operator[](int index)
 {
     return this->nodes[index];
 }
+
+void Graph::removeEdge(int v_key_from, int v_key_to)
+{
+    this->nodes[v_key_from]->removeEdge(this->nodes[v_key_to]);
+    this->nodes[v_key_to]->removeEdge(this->nodes[v_key_from]);
+}
