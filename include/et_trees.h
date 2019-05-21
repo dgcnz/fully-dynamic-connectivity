@@ -13,7 +13,6 @@ public:
     ET_Tree(Node *tree_root)
     {
         bbst = new RBTree();
-        cout << "ETTree rooted at " << tree_root->key << endl;
         this->length = 0;
         this->ET(length, tree_root, nullptr);
     }
@@ -33,7 +32,6 @@ public:
 
     void visit(int &x, Node *node)
     {
-        cout << "Visited node " << node->key << " at time: " << x << endl;
         bbst->insertValue(x, { { "occurrence", node } });
         ++x;
     }

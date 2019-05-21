@@ -22,7 +22,6 @@ void RBTree::setColor(RBNode *&node, RBColor color)
 
     node->setColor(color);
 }
-
 RBNode *RBTree::insertBST(RBNode *&root, RBNode *&ptr)
 {
     if (root == nullptr)
@@ -45,9 +44,7 @@ RBNode *RBTree::insertBST(RBNode *&root, RBNode *&ptr)
 void RBTree::insertValue(int key, map<string, any> attr)
 {
     RBNode *node = new RBNode(key, attr);
-    cout << "Inserting " << key << " into rbtree\n";
     root = insertBST(root, node);
-    cout << "fixing up insertion\n";
     fixInsertRBTree(node);
 }
 
