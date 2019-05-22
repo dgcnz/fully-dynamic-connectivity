@@ -1,0 +1,6 @@
+strict graph {
+0 [color=black xlabel="{0}" ]
+
+
+{rank=same; 0; }
+}
