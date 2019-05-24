@@ -28,18 +28,18 @@ void ET_Tree::ET(int &x, SFNode *root, SFNode *parent)
 void ET_Tree::visit(int &x, SFNode *node)
 {
     cout << "Visited node " << node->key << " at time: " << x << endl;
-    bbst->insertValue(x, { { "occurrence", node } });
+    bbst->rbtInsert(x, { { "occurrence", node } });
     if (!visited[node->key])
     {
         RBNode **fatherptr;
-        this->bbst->find(x, fatherptr);
+        this->bbst->bstFind(x, fatherptr);
         node->first_occurrence = node->last_occurrence = *fatherptr;
         visited[node->key] = true;
     }
     else
     {
         RBNode **fatherptr;
-        this->bbst->find(x, fatherptr);
+        this->bbst->bstFind(x, fatherptr);
         node->last_occurrence = *fatherptr;
     }
     ++x;
